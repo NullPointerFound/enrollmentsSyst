@@ -1,6 +1,5 @@
 package com.hackathon.enrollmentSystem.enrollmentSystem.controller;
 
-import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Application;
 import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Course;
 import com.hackathon.enrollmentSystem.enrollmentSystem.service.CourseService;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ public class CourseController {
 
     @PostMapping
     public Course createCourse(@RequestBody Course course){
-
         return courseService.createCourse(course);
     }
 
