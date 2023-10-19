@@ -8,7 +8,7 @@ public interface ApplicationService {
 
     public Application createNewApplication(Application application);
 
-    public String deleteApplicationById(Long applicationId);
+    public void deleteApplicationById(Long applicationId);
 
     public Application updateApplicationById(Long applicationId, Application application);
 
