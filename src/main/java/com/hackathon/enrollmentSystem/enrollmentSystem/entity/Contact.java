@@ -15,5 +15,6 @@ public class Contact extends BaseId {
 
     private String fullName;
     private String email;
-    private String note;
+    private String Body;
+
 }
