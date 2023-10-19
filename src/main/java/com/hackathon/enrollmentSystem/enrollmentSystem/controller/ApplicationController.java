@@ -1,6 +1,7 @@
 package com.hackathon.enrollmentSystem.enrollmentSystem.controller;
 
 import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Application;
+import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Status;
 import com.hackathon.enrollmentSystem.enrollmentSystem.service.ApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +49,13 @@ public class ApplicationController {
     public CheckStatusResponse checkStatusOfApplication(@RequestBody CheckStatus checkStatus){
 
         return applicationService.checkStatusOfApplication(checkStatus);
+    }
+
+    @PostMapping("/{applicationId}/{status}")
+    public String changeApplicationStatus(@PathVariable(name = "applicationId") Long applicationId, @PathVariable(name = "status") String status){
+
+        Status AppStatus = Status.valueOf(status);
+
+        return applicationService.changeApplicationStatus(applicationId, AppStatus);
     }
 }

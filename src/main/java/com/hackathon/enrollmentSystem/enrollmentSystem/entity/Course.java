@@ -1,6 +1,7 @@
 package com.hackathon.enrollmentSystem.enrollmentSystem.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,5 @@ public class Course extends IdBasedEntity {
     private String courseName;
     private String description;
     private LocalDate startingDate;
+
 }

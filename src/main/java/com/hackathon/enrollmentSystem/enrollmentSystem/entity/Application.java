@@ -1,8 +1,7 @@
 package com.hackathon.enrollmentSystem.enrollmentSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,12 +26,15 @@ public class Application extends IdBasedEntity {
     @CreationTimestamp
     private LocalDateTime date;
     private String Address;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @JsonIgnore
     private String note;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
     private Course course;
 
     private Integer Tracking;

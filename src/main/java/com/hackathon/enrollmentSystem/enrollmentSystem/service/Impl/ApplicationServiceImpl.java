@@ -29,7 +29,7 @@ public class ApplicationServiceImpl implements ApplicationService {
                 () -> new ResourceNotFound("Course","ID", courseId)
         );
         application.setCourse(courseFound);
-        application.setStatus(Status.Reviewing);
+        application.setStatus(Status.REVIEWING);
         application.setTracking(generateRandomNumber());
         return applicationRepository.save(application);
     }
@@ -79,6 +79,19 @@ public class ApplicationServiceImpl implements ApplicationService {
             return checkStatusResponse;
         } else
             throw new ResourceNotFound("Application","tracking", checkStatus.getTrackingNumber());
+    }
+
+    @Override
+    public String changeApplicationStatus(Long applicationId, Status status) {
+
+        Application foundApplication = getApplicationByIdOrThrowNoFoundException(applicationId);
+
+        if ( foundApplication.getStatus() != status){
+            foundApplication.setStatus(status);
+            applicationRepository.save(foundApplication);
+            return "Status has been changed successfully";
+        } else
+            return "Status remained the same";
     }
 
 
