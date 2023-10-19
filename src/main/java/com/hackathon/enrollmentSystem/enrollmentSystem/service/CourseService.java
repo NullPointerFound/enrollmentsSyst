@@ -8,7 +8,7 @@ public interface CourseService {
 
     public Course createCourse(Course course);
 
-    public String deleteCourseById(Long courseId);
+    public void deleteCourseById(Long courseId);
 
     public Course updateCourseById(Long courseId, Course course);
 

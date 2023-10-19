@@ -35,7 +35,7 @@ public class Application extends IdBasedEntity {
     @OneToOne
     private Course course;
 
-    private Long Tracking;
+    private Integer Tracking;
 
 
 }

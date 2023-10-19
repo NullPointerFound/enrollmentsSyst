@@ -5,19 +5,22 @@ import com.hackathon.enrollmentSystem.enrollmentSystem.service.ApplicationServic
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import playload.CheckStatus;
+import playload.CheckStatusResponse;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/application")
+@RequestMapping("/api/v1/application")
 @AllArgsConstructor
 public class ApplicationController {
 
     private ApplicationService applicationService;
 
-    @PostMapping
-    public Application newApplication(@RequestBody Application application){
-        return applicationService.createNewApplication(application);
+    @PostMapping("/{courseId}")
+    public Application newApplication(@RequestBody Application application, @PathVariable Long courseId){
+
+        return applicationService.createNewApplication(application,courseId);
     }
 
     @DeleteMapping("/{applicationId}")
@@ -31,14 +34,19 @@ public class ApplicationController {
         return applicationService.updateApplicationById(applicationId, application);
     }
 
-
     @GetMapping
     public List<Application> getAllApplications(){
         return applicationService.getAllApplications();
     }
 
     @GetMapping("/{applicationId}")
-    public Application getApplicationById(Long applicationId){
+    public Application getApplicationById(@PathVariable Long applicationId){
         return applicationService.getApplicationById(applicationId);
+    }
+
+    @GetMapping("/checkStatus")
+    public CheckStatusResponse checkStatusOfApplication(@RequestBody CheckStatus checkStatus){
+
+        return applicationService.checkStatusOfApplication(checkStatus);
     }
 }
