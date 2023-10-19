@@ -10,7 +10,7 @@ public interface ApplicationService {
 
     public String deleteApplicationById(Long applicationId);
 
-    public Application updateApplicationById(Long applicationId);
+    public Application updateApplicationById(Long applicationId, Application application);
 
     public List<Application> getAllApplications();
 

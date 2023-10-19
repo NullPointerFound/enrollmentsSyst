@@ -27,8 +27,8 @@ public class ApplicationController {
     }
 
     @PutMapping("/{applicationId}")
-    public Application updateApplicationById(Long applicationId){
-        return applicationService.updateApplicationById(applicationId);
+    public Application updateApplicationById(Long applicationId, Application application){
+        return applicationService.updateApplicationById(applicationId, application);
     }
 
 
