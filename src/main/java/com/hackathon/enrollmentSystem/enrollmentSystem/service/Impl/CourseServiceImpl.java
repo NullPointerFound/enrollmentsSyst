@@ -16,6 +16,8 @@ public class CourseServiceImpl implements CourseService {
 
     private CourseRepository courseRepository;
 
+    private ServiceHelper serviceHelper;
+
     @Override
     public Course createCourse(Course course) {
         return courseRepository.save(course);
@@ -23,13 +25,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourseById(Long courseId) {
-        Course courseFound = getCourseByIdOrThrowNoFoundException(courseId);
+        Course courseFound = serviceHelper.getCourseByIdOrThrowNoFoundException(courseId);
         courseRepository.delete(courseFound);
     }
 
     @Override
     public Course updateCourseById(Long courseId, Course course) {
-        Course courseFound = getCourseByIdOrThrowNoFoundException(courseId);
+        Course courseFound = serviceHelper.getCourseByIdOrThrowNoFoundException(courseId);
         return null;
     }
 
@@ -41,14 +43,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course getCourseById(Long courseId) {
-        Course courseFound = getCourseByIdOrThrowNoFoundException(courseId);
+        Course courseFound = serviceHelper.getCourseByIdOrThrowNoFoundException(courseId);
         return courseFound;
     }
 
-    private Course getCourseByIdOrThrowNoFoundException(Long courseId) {
-        Course courseFound = courseRepository.findById(courseId).orElseThrow(
-                () -> new ResourceNotFound("Course","ID", courseId)
-        );
-        return courseFound;
-    }
+
 }

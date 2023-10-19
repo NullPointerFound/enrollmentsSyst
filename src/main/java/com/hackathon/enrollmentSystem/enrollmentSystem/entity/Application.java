@@ -25,19 +25,17 @@ public class Application extends IdBasedEntity {
 
     @CreationTimestamp
     private LocalDateTime date;
+
     private String Address;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @JsonIgnore
-    private String note;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
 
-    private Integer Tracking;
+    private Integer tracking;
 
 
 }

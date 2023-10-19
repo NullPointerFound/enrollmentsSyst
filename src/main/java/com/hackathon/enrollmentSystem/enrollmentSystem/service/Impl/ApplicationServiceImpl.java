@@ -20,31 +20,31 @@ import java.util.Random;
 public class ApplicationServiceImpl implements ApplicationService {
 
     private ApplicationRepository applicationRepository;
-    private CourseRepository courseRepository;
+
+
+    private ServiceHelper serviceHelper;
 
     @Override
     public Application createNewApplication(Application application, Long courseId) {
 
-        Course courseFound = courseRepository.findById(courseId).orElseThrow(
-                () -> new ResourceNotFound("Course","ID", courseId)
-        );
+        Course courseFound = serviceHelper.getCourseByIdOrThrowNoFoundException(courseId);
         application.setCourse(courseFound);
         application.setStatus(Status.REVIEWING);
-        application.setTracking(generateRandomNumber());
+        application.setTracking(serviceHelper.generateRandomNumber());
         return applicationRepository.save(application);
     }
 
     @Override
     public void deleteApplicationById(Long applicationId) {
 
-        Application applicationFound = getApplicationByIdOrThrowNoFoundException(applicationId);
+        Application applicationFound = serviceHelper.getApplicationByIdOrThrowNoFoundException(applicationId);
         applicationRepository.delete(applicationFound);
     }
 
     @Override
     public Application updateApplicationById(Long applicationId, Application application) {
 
-        Application applicationFound = getApplicationByIdOrThrowNoFoundException(applicationId);
+        Application applicationFound = serviceHelper.getApplicationByIdOrThrowNoFoundException(applicationId);
 
         return null;
     }
@@ -58,7 +58,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Application getApplicationById(Long applicationId) {
 
-        Application applicationFound = getApplicationByIdOrThrowNoFoundException(applicationId);
+        Application applicationFound = serviceHelper.getApplicationByIdOrThrowNoFoundException(applicationId);
 
         return applicationFound;
     }
@@ -66,7 +66,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public CheckStatusResponse checkStatusOfApplication(CheckStatus checkStatus) {
 
-        Application applicationFound = getApplicationByEmailOrThrowNoFoundException(checkStatus.getEmail());
+        Application applicationFound = serviceHelper.getApplicationByTrackingOrThrowNoFoundException(checkStatus.getTrackingNumber());
 
         if (applicationFound.getTracking().equals(checkStatus.getTrackingNumber())) {
             CheckStatusResponse checkStatusResponse = new CheckStatusResponse();
@@ -84,7 +84,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public String changeApplicationStatus(Long applicationId, Status status) {
 
-        Application foundApplication = getApplicationByIdOrThrowNoFoundException(applicationId);
+        Application foundApplication = serviceHelper.getApplicationByIdOrThrowNoFoundException(applicationId);
 
         if ( foundApplication.getStatus() != status){
             foundApplication.setStatus(status);
@@ -95,30 +95,5 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
 
-    private Application getApplicationByEmailOrThrowNoFoundException(String email) {
-        Application applicationFound = applicationRepository.findByEmail(email).orElseThrow(
-                () -> new ResourceNotFound("Application","email", email)
-        );
-        return applicationFound;
-    }
 
-    // utility Function
-    private Application getApplicationByIdOrThrowNoFoundException(Long applicationId) {
-        Application applicationFound = applicationRepository.findById(applicationId).orElseThrow(
-                () -> new ResourceNotFound("Application","ID", applicationId)
-        );
-        return applicationFound;
-    }
-
-    public static int generateRandomNumber() {
-        // Define the range of possible 7-digit numbers
-        int min = 1000000;
-        int max = 9999999;
-
-        // Create an instance of the Random class
-        Random random = new Random();
-
-        // Generate and return a random number within the specified range
-        return random.nextInt((max - min) + 1) + min;
-    }
 }
