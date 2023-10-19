@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Course extends BaseId {
+public class Course extends IdBasedEntity {
 
     private String courseName;
     private String description;

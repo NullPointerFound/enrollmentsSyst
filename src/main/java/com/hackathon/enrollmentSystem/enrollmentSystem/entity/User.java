@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User extends BaseId{
+public class User extends IdBasedEntity {
 
     private String fullName;
     private String username;

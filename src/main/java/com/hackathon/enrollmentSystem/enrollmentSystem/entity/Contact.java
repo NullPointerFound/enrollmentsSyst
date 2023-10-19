@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Contact extends BaseId {
+public class Contact extends IdBasedEntity {
 
     private String fullName;
     private String email;

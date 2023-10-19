@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Application extends BaseId{
+public class Application extends IdBasedEntity {
 
     private String fullName;
     private String email;
