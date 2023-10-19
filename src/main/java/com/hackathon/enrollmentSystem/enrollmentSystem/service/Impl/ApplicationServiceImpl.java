@@ -38,7 +38,6 @@ public class ApplicationServiceImpl implements ApplicationService {
     public void deleteApplicationById(Long applicationId) {
 
         Application applicationFound = getApplicationByIdOrThrowNoFoundException(applicationId);
-
         applicationRepository.delete(applicationFound);
     }
 
