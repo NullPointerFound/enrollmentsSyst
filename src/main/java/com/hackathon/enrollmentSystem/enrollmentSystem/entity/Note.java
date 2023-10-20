@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Note extends IdBasedEntity{
 
-    private String note;
+    private String detail;
 
     @CreationTimestamp
     private LocalDateTime creationDate;

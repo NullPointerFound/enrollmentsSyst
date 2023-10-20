@@ -3,8 +3,8 @@ package com.hackathon.enrollmentSystem.enrollmentSystem.controller;
 import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Application;
 import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Status;
 import com.hackathon.enrollmentSystem.enrollmentSystem.service.ApplicationService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import playload.CheckStatus;
 import playload.CheckStatusResponse;
@@ -18,6 +18,7 @@ public class ApplicationController {
 
     private ApplicationService applicationService;
 
+    @Operation(summary = "Making a new application", description = "Creating a new admin")
     @PostMapping("/{courseId}")
     public Application newApplication(@RequestBody Application application, @PathVariable Long courseId){
 

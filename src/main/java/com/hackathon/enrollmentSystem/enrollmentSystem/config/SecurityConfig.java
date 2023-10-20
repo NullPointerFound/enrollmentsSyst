@@ -32,19 +32,42 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//
+//        http
+//                .authorizeHttpRequests((request) ->
+//                        request.requestMatchers("/api/**").permitAll()
+//                                .requestMatchers( HttpMethod.POST  ,"/api/v1/auth/register").permitAll()
+//                                .requestMatchers("/api/v1/**").permitAll()
+////                                .requestMatchers("/swagger-ui/**").permitAll()
+////                                .requestMatchers("/v3/api-docs/**").permitAll()
+////                                .requestMatchers("/swagger-resources/**").permitAll()
+////                                .requestMatchers("/swagger-ui.html").permitAll()
+////                                .requestMatchers("/webjars/**").permitAll()
+//                                .anyRequest().authenticated()
+//                ).exceptionHandling( exception -> exception
+//                        .authenticationEntryPoint(authenticationEntryPoint)
+//
+//                ).sessionManagement( session -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                );
+//
+//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
                 .authorizeHttpRequests((request) ->
-                        request.requestMatchers(HttpMethod.GET,"/api/**").permitAll()
-                                .requestMatchers("/api/v1/**").permitAll()
-                                .requestMatchers("/swagger-ui/**").permitAll()
-                                .requestMatchers("/v3/api-docs/**").permitAll()
-                                .requestMatchers("/swagger-resources/**").permitAll()
-                                .requestMatchers("/swagger-ui.html").permitAll()
-                                .requestMatchers("/webjars/**").permitAll()
-                                .anyRequest().authenticated()
+                        request
+                                .requestMatchers("/api/v1/auth/register").permitAll()
+                                .requestMatchers("/api/v1/auth/signin").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/api/v1/course").authenticated()
+                                .anyRequest().permitAll()
                 ).exceptionHandling( exception -> exception
                         .authenticationEntryPoint(authenticationEntryPoint)
 
@@ -56,7 +79,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {

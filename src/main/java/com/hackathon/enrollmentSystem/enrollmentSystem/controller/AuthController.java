@@ -2,6 +2,8 @@ package com.hackathon.enrollmentSystem.enrollmentSystem.controller;
 
 import com.hackathon.enrollmentSystem.enrollmentSystem.entity.User;
 import com.hackathon.enrollmentSystem.enrollmentSystem.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +20,17 @@ public class AuthController {
 
     private AuthService authService;
 
+    @Operation(summary = "Register a new admin", description = "Creating a new admin")
+    @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user){
+    public String registerUser(@RequestBody User user){
 
         authService.registerUser(user);
 
-        return ResponseEntity.ok("User registered successfully");
+        return "User registered successfully";
     }
 
+    @Operation(summary = "Sign in to Dashboard for admin Management", description = "Sign in to Dashboard for admin Management")
     @PostMapping("/signin")
     public ResponseEntity<JWTAuthResponse> signIn(@RequestBody SignDto signDto){
 
