@@ -36,6 +36,4 @@ public class Application extends IdBasedEntity {
     private Course course;
 
     private Integer tracking;
-
-
 }
