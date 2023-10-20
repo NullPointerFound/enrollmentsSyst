@@ -32,6 +32,8 @@ public class ContactController {
 
     @GetMapping("/{contactId}")
     public Contact getContactById(Long contactId){
+
+
         return contactService.getContactById(contactId);
     }
 }

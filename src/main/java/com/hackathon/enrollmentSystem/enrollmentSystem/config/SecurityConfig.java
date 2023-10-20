@@ -66,7 +66,6 @@ public class SecurityConfig {
                         request
                                 .requestMatchers("/api/v1/auth/register").permitAll()
                                 .requestMatchers("/api/v1/auth/signin").permitAll()
-                                .requestMatchers(HttpMethod.POST,"/api/v1/course").authenticated()
                                 .anyRequest().permitAll()
                 ).exceptionHandling( exception -> exception
                         .authenticationEntryPoint(authenticationEntryPoint)

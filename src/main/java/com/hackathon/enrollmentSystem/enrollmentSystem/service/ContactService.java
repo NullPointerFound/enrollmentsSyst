@@ -8,7 +8,7 @@ public interface ContactService {
 
     public Contact createNewContact(Contact contact);
 
-    public String deleteContactById(Long contactId);
+    public void deleteContactById(Long contactId);
 
     public List<Contact> getAllContacts();
 

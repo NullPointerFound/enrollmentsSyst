@@ -1,14 +1,8 @@
 package com.hackathon.enrollmentSystem.enrollmentSystem.service.Impl;
 
-import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Application;
-import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Course;
-import com.hackathon.enrollmentSystem.enrollmentSystem.entity.Note;
-import com.hackathon.enrollmentSystem.enrollmentSystem.entity.User;
+import com.hackathon.enrollmentSystem.enrollmentSystem.entity.*;
 import com.hackathon.enrollmentSystem.enrollmentSystem.exception.ResourceNotFound;
-import com.hackathon.enrollmentSystem.enrollmentSystem.repository.ApplicationRepository;
-import com.hackathon.enrollmentSystem.enrollmentSystem.repository.CourseRepository;
-import com.hackathon.enrollmentSystem.enrollmentSystem.repository.NoteRepository;
-import com.hackathon.enrollmentSystem.enrollmentSystem.repository.UserRepository;
+import com.hackathon.enrollmentSystem.enrollmentSystem.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +20,8 @@ public class ServiceHelper {
     private ApplicationRepository applicationRepository;
 
     private NoteRepository noteRepository;
+
+    private ContactRepository contactRepository;
 
     // find the authenticated user
     protected User getAuthenticatedUser(){
@@ -76,5 +72,12 @@ public class ServiceHelper {
                 () -> new ResourceNotFound("Application","tracking", tracking)
         );
         return applicationFound;
+    }
+
+    protected Contact getContactByIdOrThrowNoFoundException(Long id) {
+        Contact contactFound = contactRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFound("Contact","id", id)
+        );
+        return contactFound;
     }
 }

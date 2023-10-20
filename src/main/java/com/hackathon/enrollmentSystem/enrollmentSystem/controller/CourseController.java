@@ -15,16 +15,16 @@ import java.util.List;
 public class CourseController {
     private CourseService courseService;
 
-//    @Operation(summary = "Adding a Course", description = "Adding a course by passing a course information")
-//    @SecurityRequirement(name = "Bearer Authentication")
+    @Operation(summary = "Adding a Course", description = "Adding a course by passing a course information")
+    @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping
     public Course createCourse(@RequestBody Course course){
         return courseService.createCourse(course);
     }
 
 
-//    @Operation(summary = "Deleting a Course by ID", description = "Deleting a course by passing a course id")
-//    @SecurityRequirement(name = "Bearer Authentication")
+    @Operation(summary = "Deleting a Course by ID", description = "Deleting a course by passing a course id")
+    @SecurityRequirement(name = "Bearer Authentication")
     @DeleteMapping("/{courseId}")
     public String deleteCourseById(@PathVariable Long courseId){
         courseService.deleteCourseById(courseId);
